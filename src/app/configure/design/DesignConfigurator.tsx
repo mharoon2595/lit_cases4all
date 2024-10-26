@@ -27,6 +27,9 @@ import { BASE_PRICE } from "@/config/products";
 import { useUploadThing } from "@/lib/uploadthing";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
+import { SaveConfigArgs } from "./actions";
+import { saveConfig as _saveConfig } from "./actions";
+import { useMutation } from "@tanstack/react-query";
 
 interface DesignConfiguratorProps {
   configId: string;
@@ -41,6 +44,23 @@ const DesignConfigurator = ({
 }: DesignConfiguratorProps) => {
   const { toast } = useToast();
   const router = useRouter();
+
+  const { mutate: saveConfig, isPending } = useMutation({
+    mutationKey: ["save-config"],
+    mutationFn: async (args: SaveConfigArgs) => {
+      await Promise.all([saveConfiguration(), _saveConfig(args)]);
+    },
+    onError: () => {
+      toast({
+        title: "Something went wrong",
+        description: "There was an error on our end. Please try again.",
+        variant: "destructive",
+      });
+    },
+    onSuccess: () => {
+      router.push(`/configure/preview?id=${configId}`);
+    },
+  });
 
   const [options, setOptions] = useState<{
     color: (typeof COLORS)[number];
@@ -112,7 +132,6 @@ const DesignConfigurator = ({
       const file = new File([blob], "filename.png", { type: "image/png" });
 
       await startUpload([file], { configId });
-      console.log("all done mate!");
     } catch (err) {
       toast({
         title: "Something went wrong",
@@ -375,11 +394,21 @@ const DesignConfigurator = ({
                 )}
               </p>
               <Button
-                onClick={() => saveConfiguration()}
+                onClick={() =>
+                  saveConfig({
+                    configId,
+                    color: options.color.value,
+                    finish: options.finish.value,
+                    material: options.material.value,
+                    model: options.model.value,
+                  })
+                }
+                disabled={isPending}
                 size="sm"
                 className="w-full"
+                isLoading={isPending}
               >
-                Continue
+                {isPending ? "Processing" : "Continue"}
                 <ArrowRight className="h-4 w-4 ml-1.5 inline" />
               </Button>
             </div>
