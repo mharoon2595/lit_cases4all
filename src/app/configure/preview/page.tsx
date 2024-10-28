@@ -1,8 +1,13 @@
 import React from "react";
-import { PageProps } from "../../../../.next/types/app/layout";
 import { notFound } from "next/navigation";
 import { db } from "@/db";
 import DesignPreview from "./DesignPreview";
+
+interface PageProps {
+  searchParams: {
+    [key: string]: string | string[] | undefined;
+  };
+}
 
 const page = async ({ searchParams }: PageProps) => {
   const { id } = searchParams;

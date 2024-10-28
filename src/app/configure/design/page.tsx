@@ -1,7 +1,12 @@
 import { notFound } from "next/navigation";
-import { PageProps } from "../../../../.next/types/app/layout";
 import { db } from "@/db";
 import DesignConfigurator from "./DesignConfigurator";
+
+interface PageProps {
+  searchParams: {
+    [key: string]: string | string[] | undefined;
+  };
+}
 
 const page = async ({ searchParams }: PageProps) => {
   const { id } = searchParams;
