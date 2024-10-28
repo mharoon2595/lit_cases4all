@@ -26,7 +26,8 @@ export default function Home() {
                 </h1>
                 <p className="mt-8 text-lg lg:pr-10 max-w-prose text-center lg:text-left text-balance md:text-wrap">
                   Make your phone your{" "}
-                  <span className="font-semibold">very own</span> with CaseCobra{" "}
+                  <span className="font-semibold">very own</span> with
+                  CobraCovers{" "}
                 </p>
 
                 <ul className="mt-8 space-y-2 text-left font-medium flex flex-col items-center sm:items-start">
