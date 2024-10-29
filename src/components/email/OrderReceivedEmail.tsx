@@ -23,7 +23,7 @@ const OrderReceivedEmail = ({
   orderId: string;
   orderDate: string;
 }) => {
-  const baseUrl = "https://cobracovers.vercel.app";
+  const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
   return (
     <Html>
