@@ -13,17 +13,20 @@ import {
   Section,
   Text,
 } from "@react-email/components";
+import * as React from "react";
 
-const OrderReceivedEmail = ({
+export function OrderReceivedEmail({
+  url,
   shippingAddress,
   orderId,
   orderDate,
 }: {
+  url: string;
   shippingAddress: ShippingAddress;
   orderId: string;
   orderDate: string;
-}) => {
-  const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL;
+}): React.ReactElement {
+  const baseUrl = url;
 
   return (
     <Html>
@@ -96,9 +99,7 @@ const OrderReceivedEmail = ({
       </Body>
     </Html>
   );
-};
-
-export default OrderReceivedEmail;
+}
 
 const paddingX = {
   paddingLeft: "40px",

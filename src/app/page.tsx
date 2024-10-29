@@ -19,9 +19,11 @@ export default function Home() {
                 <div className="absolute w-28 left-0 -top-20 hidden lg:block">
                   <img src="/snake-1.png" className="w-full" />
                 </div>
-                <h1 className="relative w-fit tracking-tight text-balance mt-16 font-bold !leading-tight text-gray-900 text-5xl md:text-6xl lg:text-7xl">
+                <h1 className="relative w-fit tracking-tight text-balance mt-16 font-bold !leading-snug text-gray-900 text-5xl md:text-6xl lg:text-7xl">
                   Your Image on a{" "}
-                  <span className="bg-green-600 px-2 text-white">Custom</span>{" "}
+                  <span className=" bg-green-600 px-2 my-1 text-white">
+                    Custom
+                  </span>{" "}
                   Phone Case
                 </h1>
                 <p className="mt-8 text-lg lg:pr-10 max-w-prose text-center lg:text-left text-balance md:text-wrap">
@@ -104,7 +106,11 @@ export default function Home() {
                 src="/line.png"
                 className="absolute w-20 -left-6 -bottom-6 select-none"
               />
-              <Phone className="w-64" imgSrc="/testimonials/1.jpg" />
+              <Phone
+                className="w-64"
+                imgSrc="/testimonials/1.jpg"
+                initial={true}
+              />
             </div>
           </div>
         </MaxWidthWrapper>
@@ -169,12 +175,14 @@ export default function Home() {
               </div>
               <div className="text-lg leading-8">
                 <p>
-                  "The case feels durable and i even got a compliment on the
-                  design. Had the case for two and a half months now and{" "}
+                  "I usually keep my phone together with my keys in my pocket
+                  and that led to some pretty heavy scratchmarks on all of my
+                  last phone cases. This one, besides a barely noticeable
+                  scratch on the corner,{" "}
                   <span className="p-0.5 bg-slate-800 text-white">
-                    the image is super clear.
-                  </span>{" "}
-                  Love it."
+                    looks brand new after about half a year
+                  </span>
+                  . I dig it."
                 </p>
               </div>
               <div className="flex gap-4 mt-2">
@@ -204,9 +212,9 @@ export default function Home() {
         <MaxWidthWrapper className="py-24">
           <div className="mb-12 px-6 lg:px-8">
             <div className="mx-auto max-w-2xl sm:text-center">
-              <h2 className="order-1 mt-2 tracking-tight text-center text-balance !leading-tight font-bold text-5xl md:text-6xl text-gray-900">
+              <h2 className="order-1 mt-2 tracking-tight text-center text-balance !leading-snug font-bold text-5xl md:text-6xl text-gray-900">
                 Upload your photo and get{" "}
-                <span className="relative px-2 bg-green-600 text-white">
+                <span className="relative px-2 bg-green-600 text-white text-nowrap">
                   your own case{" "}
                 </span>{" "}
                 now!
@@ -222,12 +230,12 @@ export default function Home() {
               />
               <div className="relative h-80 md:h-full w-full md:justify-self-end max-w-sm rounded-xl bg-gray-900/5 ring-inset ring-gray-900/10 lg:rounded-2xl">
                 <img
-                  src="/horse.jpg"
+                  src="/dude.jpg"
                   className="rounded-md object-cover bg-white shadow-2xl ring-1 ring-gray-900/10 h-full w-full"
                 />
               </div>
 
-              <Phone className="w-60" imgSrc="/horse_phone.jpg" />
+              <Phone className="w-60" imgSrc="/dude-phone.jpg" />
             </div>
           </div>
 
