@@ -3,10 +3,13 @@ import { stripe } from "@/lib/stripe";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
-import { Resend } from "resend";
+import { render } from "@react-email/components";
+import { MailerSend, EmailParams, Sender, Recipient } from "mailersend";
 import { OrderReceivedEmail } from "@/components/email/OrderReceivedEmail";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const mailerSend = new MailerSend({
+  apiKey: process.env.MAILERSEND_API_KEY || "",
+});
 
 export async function POST(req: Request) {
   try {
@@ -71,11 +74,9 @@ export async function POST(req: Request) {
         },
       });
 
-      await resend.emails.send({
-        from: "CaseCobra <onboarding@resend.dev>",
-        to: [event.data.object.customer_details.email],
-        subject: "Thanks for your order!",
-        react: OrderReceivedEmail({
+      const emailHtml = await render(
+        OrderReceivedEmail({
+          url: "https://cobracovers.vercel.app/",
           orderId,
           orderDate: updatedOrder.createdAt.toLocaleDateString(),
           // @ts-ignore
@@ -87,8 +88,24 @@ export async function POST(req: Request) {
             street: shippingAddress!.line1!,
             state: shippingAddress!.state,
           },
-        }),
-      });
+        })
+      );
+
+      const sentFrom = new Sender("mharoon@cobracovers.com", "Cobra Covers");
+      const recipients = [
+        new Recipient(
+          event.data.object.customer_details.email,
+          session.customer_details!.name!
+        ),
+      ];
+
+      const emailParams = new EmailParams()
+        .setFrom(sentFrom)
+        .setTo(recipients)
+        .setSubject("Thanks for your order!")
+        .setHtml(emailHtml);
+
+      await mailerSend.email.send(emailParams);
     }
 
     return NextResponse.json({ result: event, ok: true });
