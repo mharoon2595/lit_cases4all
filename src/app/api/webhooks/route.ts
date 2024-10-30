@@ -91,7 +91,10 @@ export async function POST(req: Request) {
         })
       );
 
-      const sentFrom = new Sender("mharoon@cobracovers.com", "Cobra Covers");
+      const sentFrom = new Sender(
+        "trial-o65qngky2ewlwr12.mlsender.net",
+        "Cobra Covers"
+      );
       const recipients = [
         new Recipient(
           event.data.object.customer_details.email,
