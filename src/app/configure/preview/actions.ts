@@ -4,7 +4,6 @@ import { BASE_PRICE, PRODUCT_PRICES } from "@/config/products";
 import { db } from "@/db";
 import { stripe } from "@/lib/stripe";
 import { currentUser } from "@clerk/nextjs/server";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Order } from "@prisma/client";
 
 export const createCheckoutSession = async ({
@@ -58,7 +57,6 @@ export const createCheckoutSession = async ({
 
   const product = await stripe.products.create({
     name: "Custom iPhone Case",
-    images: [configuration.url],
     default_price_data: {
       currency: "USD",
       unit_amount: price,

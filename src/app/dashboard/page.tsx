@@ -17,7 +17,6 @@ import {
 } from "@/components/ui/table";
 import { db } from "@/db";
 import { formatPrice } from "@/lib/utils";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { notFound } from "next/navigation";
 import StatusDropdown from "./StatusDropdown";
 import { currentUser } from "@clerk/nextjs/server";
@@ -31,7 +30,6 @@ const Page = async () => {
   const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
 
   if (!user || email !== ADMIN_EMAIL) {
-    return notFound();
   }
 
   const orders = await db.order.findMany({
@@ -78,7 +76,7 @@ const Page = async () => {
   const MONTHLY_GOAL = 2500;
 
   return (
-    <div className="flex min-h-screen w-full bg-muted/40">
+    <div className="flex min-h-screen w-full bg-muted/40 p-3">
       <div className="max-w-7xl w-full mx-auto flex flex-col sm:gap-4 sm:py-4">
         <div className="flex flex-col gap-16">
           <div className="grid gap-4 sm:grid-cols-2">
@@ -120,7 +118,7 @@ const Page = async () => {
             </Card>
           </div>
 
-          <h1 className="text-4xl font-bold tracking-tight">Incoming orders</h1>
+          <h1 className="text-4xl font-bold tracking-tight">Orders placed</h1>
 
           <Table>
             <TableHeader>

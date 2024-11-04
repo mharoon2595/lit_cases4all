@@ -2,7 +2,6 @@
 
 import { db } from "@/db";
 import { currentUser } from "@clerk/nextjs/server";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 export const getAuthStatus = async () => {
   const user = await currentUser();

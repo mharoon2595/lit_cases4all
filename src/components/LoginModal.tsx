@@ -7,10 +7,6 @@ import {
   DialogTitle,
 } from "./ui/dialog";
 import Image from "next/image";
-import {
-  LoginLink,
-  RegisterLink,
-} from "@kinde-oss/kinde-auth-nextjs/components";
 import { buttonVariants } from "./ui/button";
 import Link from "next/link";
 
@@ -23,7 +19,7 @@ const LoginModal = ({
 }) => {
   return (
     <Dialog onOpenChange={setIsOpen} open={isOpen}>
-      <DialogContent className="absolute z-[9999999]">
+      <DialogContent className="absolute top-1/2 translate-y-1/2 w-[80vw] rounded-md z-[9999999]">
         <DialogHeader>
           <div className="relative mx-auto w-24 h-24 mb-2">
             <Image

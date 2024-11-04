@@ -13,7 +13,6 @@ import Confetti from "react-dom-confetti";
 import { createCheckoutSession } from "./actions";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import LoginModal from "@/components/LoginModal";
 import { useUser } from "@clerk/nextjs";
 
@@ -21,7 +20,6 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
   const router = useRouter();
   const { toast } = useToast();
   const { id } = configuration;
-  // const { user } = useKindeBrowserClient();
   const { isLoaded, isSignedIn } = useUser();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
 

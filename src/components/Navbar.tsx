@@ -2,17 +2,13 @@ import Link from "next/link";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import { buttonVariants } from "./ui/button";
 import { ArrowRight } from "lucide-react";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { currentUser } from "@clerk/nextjs/server";
-import { UserButton } from "@clerk/nextjs";
 import ProfileBtn from "./ui/userButton";
+import { DialogDemo } from "./Dialog";
 
 const Navbar = async () => {
-  // const { getUser } = getKindeServerSession();
   const user = await currentUser();
   const username = user?.firstName || user?.username;
-
-  console.log("User from Navbar--->", user);
 
   const isAdmin =
     user?.emailAddresses[0].emailAddress === process.env.ADMIN_EMAIL;
@@ -24,11 +20,11 @@ const Navbar = async () => {
           <Link href="/" className="flex z-40 font-semibold">
             Cobra<span className="text-green-600">Covers</span>
           </Link>
-
           <div className="h-full flex items-center space-x-4">
             {username ? (
               <>
-                <ProfileBtn />
+                <ProfileBtn isAdmin={isAdmin} />
+                <DialogDemo isAdmin={isAdmin} username={username} />
                 {isAdmin ? (
                   <Link
                     href="/dashboard"
@@ -37,7 +33,7 @@ const Navbar = async () => {
                       className: "hidden sm:flex items-center gap-1",
                     })}
                   >
-                    Dashboard
+                    Dashboard 💼
                   </Link>
                 ) : null}
 
@@ -54,24 +50,27 @@ const Navbar = async () => {
               </>
             ) : (
               <>
-                <Link
-                  href="/sign-up"
-                  className={buttonVariants({
-                    size: "sm",
-                    variant: "ghost",
-                  })}
-                >
-                  Sign up
-                </Link>
-                <Link
-                  href="/sign-in"
-                  className={buttonVariants({
-                    size: "sm",
-                    variant: "ghost",
-                  })}
-                >
-                  Sign in
-                </Link>
+                <DialogDemo />
+                <div className="space-x-2 hidden sm:block">
+                  <Link
+                    href="/sign-up"
+                    className={buttonVariants({
+                      size: "sm",
+                      variant: "ghost",
+                    })}
+                  >
+                    Sign up
+                  </Link>
+                  <Link
+                    href="/sign-in"
+                    className={buttonVariants({
+                      size: "sm",
+                      variant: "ghost",
+                    })}
+                  >
+                    Sign in
+                  </Link>
+                </div>
 
                 <div className="h-8 w-px bg-zinc-200 hidden sm:block" />
                 <Link
