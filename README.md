@@ -12,7 +12,7 @@ CobraCovers is a platform where users can create and customize their own iPhone 
 
 ## Tech Stack
 - **Frontend**: [Next.js 14](https://nextjs.org/) with App Router
-- **Backend**: [PostgreSQL](https://www.postgresql.org/)
+- **Backend**: [PostgreSQL](https://www.postgresql.org/) with [Prisma](https://www.prisma.io/)
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
 - **UI Styling**: [Tailwind CSS](https://tailwindcss.com/), [Shadcn](https://shadcn.dev/)
 - **Authentication**: [Clerk](https://clerk.dev/)
